@@ -14,6 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require underscore
+//= require gmaps/google
 function openPage() {
     document.getElementById("sidePage").style.width = "40%";
 }

@@ -1,0 +1,94 @@
+
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: -25.344, lng: 131.036};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=" + ENV['GOOGLE_API'] + "&callback=initMap">
+    </script>
+  </body>
+</html>
+
+
+
+
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>description</th>
+    <th>region</th>
+    <th>song_file</th>
+
+    <th></th>
+  </tr>
+
+  <% @articles.each do |article| %>
+    <tr>
+      <td><span onclick="openPage<%= article.id%>()"><%= article.title %></span></td>
+      <td><%= article.description %></td>
+      <td><%= article.region %></td>
+      <td><%= link_to 'play', new_article_path %></td>
+<!-- each side pages -->
+      <div id="sidePage<%= article.id%>" class="side" style="width: 0px;">
+      <a href="javascript:void(0)" class="xbutton" onclick="closePage<%= article.id%>()">&times;</a>
+      <p>this is where music will play and comments and add donation button and NGO project</p>
+      <strong>Title: <%=article.title %></strong>
+      <strong>Description: <%=article.description %></strong>
+      <strong>Region: <%=article.region %></strong>
+
+      <td > <p id="sidecontent">  </p> </td>
+
+      </div>
+
+      <script>
+      function openPage<%= article.id%>() {
+          document.getElementById("sidePage<%= article.id%>").style.width = "40%";
+      }
+
+      function closePage<%= article.id%>() {
+          document.getElementById("sidePage<%= article.id%>").style.width = "0";
+      }
+      </script>
+  <% end %>
+</table>
+<script
+   src="https://code.jquery.com/jquery-3.2.1.min.js"
+   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+   crossorigin="anonymous"></script>
+
+
+
+
+
+ <button>listen</button>
+ <%= link_to 'New article', new_article_path %>
+
+ <p>tests</p>
+ <p>
